@@ -5,6 +5,8 @@ import random
 
 def getbetterlist(simplelist):
     """
+    This function makes every simplelist a list with all the elements the same length as the longest element
+    e.g.: [123.45, 78] gives [123.45, 078.00]
     :param simplelist:
     :return: list containing elements with same length
     """
@@ -12,6 +14,7 @@ def getbetterlist(simplelist):
         """
         :param lst:
         :return: list containing elements with same length behind (decimals)
+        e.g.: [23.45, 78] gives [23.45, 78.00]
         """
         mostdecimalplaces = 0  # saves
         for num in lst:
@@ -26,6 +29,7 @@ def getbetterlist(simplelist):
         """
         :param lst:
         :return: list containing elements with same length in front (hundreds/thousands)
+        e.g.: [123, 78] gives [123, 078]
         """
         rounded_list = [round(abs(num)) for num in simplelist]
         mostnaturalnumbers = math.ceil(math.log(max(rounded_list), 10))
@@ -48,6 +52,7 @@ def positiv_negative_split(lst):
     """
     :param list containing negatives and positives:
     :return: 2 lists containing only negatives or positives
+    e.g: [-1, 2, 3, -4] gives [2, 3] & [-1, -4]
     """
     negative_betterlist = [y for y in lst if float(y) < 0]
     positive_betterlist = [x for x in lst if float(x) > 0]
@@ -55,6 +60,13 @@ def positiv_negative_split(lst):
 
 def Ihasabucket(betterlist, negative):
     """
+    This Function uses the list (containing elements with the same length) to get the length of the elements (default is the first of the list)
+    and used that value to reverse loop through every element in the list. This value (0-9) will be set in a bucket of that indexnumber
+    e.g. 153 goes to the fourth(3+1) bucket and 527 goes to the eight(7+1) bucket. After that the buckets will be empty in the list and this
+    will loop until every character has been collected in buckets (except the . and the minus). Eventually the elements with the highest value
+    at the last element which is higher than 0, get prioritized in the buckets and will be empty later in the list.
+    e.g. [123, 99], first 3 vs 9 which 9 gets last, then 2 vs 9 which 9 gets last, but then 1 vs *empty* aka 0 and then the 1 wins which means
+    123 will be set at last of the list. This bucket will be reversed when negative is True, so the last become first and the first becomes last.
     :param betterlist:
     :return: a sorted list
     """
@@ -75,6 +87,11 @@ def Ihasabucket(betterlist, negative):
 
 def runthemainprogram(lst):
     """
+    This function is the main function to combine the early coded functions. It will first run the betterlist function to create zero's on both
+    the front and the end of most elements if they are not long enough compared to the longest element.
+    After that the function will check if the input list is negative. If so the list will
+    be split and the list will both be sorted separately. If not the list will be sorted as a whole. At the end the elements will be set to
+    floats to make sure they are at there original state.
     :param lst:
     :return: sorted list
     """
@@ -82,7 +99,7 @@ def runthemainprogram(lst):
     print("Using  getbetterlist function on simple list...")
     betterlist = getbetterlist(lst)
     print("Done!")
-    if any(float(n) < 0 for n in betterlist):
+    if any(float(n) < 0 for n in betterlist): #are there negatives in the list?
         print("Contains negatives")
         print("Splits values...")
         negative_betterlist, positive_betterlist = positiv_negative_split(betterlist)
@@ -140,13 +157,15 @@ runthemainprogram(randomlist_tenthousand)
 
 runthemainprogram(randomlist_thirtythousand)
 
-Simple_positiveList = [101.02, 94.012, 20, 33, 5 , 8, 666, 235]
+Simple_positiveList = [101.02, 94.012, 20, 33, 5, 8, 666, 235]
 Simple_negativeList = [101.02, 94.012, 20.05, 33.03, 5.99, -1234.33, -54.130, -394.304, 442, 1024, 503, -421, 999]
 '''testing with a small list'''
 sortedlist = runthemainprogram(Simple_negativeList)
 print(sortedlist)
 
 '''
+Bucket Sort uses Buckets as extra space to fill in the index numbers, these buckets could be infinite long (k), which makes the 
+space complexity: O(n+k)
 The steps are approximatly: 12+ 16N + 2N^2 + 2Log(n) + 2N*Log(n)
 Which gives n*Log(n) as Big O
 '''
