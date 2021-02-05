@@ -4,7 +4,15 @@ import random
 
 
 def getbetterlist(simplelist):
+    """
+    :param simplelist:
+    :return: list containing elements with same length
+    """
     def getdecimallist(lst):
+        """
+        :param lst:
+        :return: list containing elements with same length behind (decimals)
+        """
         mostdecimalplaces = 0  # saves
         for num in lst:
             num = str(num)
@@ -15,6 +23,10 @@ def getbetterlist(simplelist):
         return decimallist
 
     def gethighzerolist(lst):
+        """
+        :param lst:
+        :return: list containing elements with same length in front (hundreds/thousands)
+        """
         rounded_list = [round(abs(num)) for num in simplelist]
         mostnaturalnumbers = math.ceil(math.log(max(rounded_list), 10))
         highzeroslist = []
@@ -33,11 +45,20 @@ def getbetterlist(simplelist):
     return betterlist
 
 def positiv_negative_split(lst):
+    """
+    :param list containing negatives and positives:
+    :return: 2 lists containing only negatives or positives
+    """
     negative_betterlist = [y for y in lst if float(y) < 0]
     positive_betterlist = [x for x in lst if float(x) > 0]
     return negative_betterlist, positive_betterlist
 
 def Ihasabucket(betterlist):
+    """
+
+    :param betterlist:
+    :return: a sorted list
+    """
     characters = len(betterlist[0])
     for character in range(characters):
         buckets = [[], [], [], [], [], [], [], [], [], []]
@@ -55,6 +76,11 @@ def Ihasabucket(betterlist):
 
 
 def runthebucketsort(lst):
+    """
+
+    :param lst:
+    :return:
+    """
     start = time.time()
     print("Using  getbetterlist function on simple list...")
     betterlist = getbetterlist(lst)
@@ -63,18 +89,23 @@ def runthebucketsort(lst):
         print("Contains negatives")
         print("Splits values...")
         negative_betterlist, positive_betterlist = positiv_negative_split(betterlist)
+        print("Done!")
         print("Uses Bucket Sort on positive better list...")
         sorted_positive_list = Ihasabucket(positive_betterlist)
         rounded_sorted_positive_list = [round(float(num)) for num in sorted_positive_list]
+        print("Done!")
         print("Uses Bucket Sort on negative better list...")
         sorted_negative_list = Ihasabucket(negative_betterlist)
         rounded_negative_positive_list = [round(float(num)) for num in sorted_negative_list]
+        print("Done!")
         print("Adding Together...")
         sortedlist = rounded_negative_positive_list + rounded_sorted_positive_list
+        print("Done!")
     else:
         print("Contains non negatives")
         print("Uses Bucket Sort on better list...")
         sortedlist = Ihasabucket(betterlist)
+        print("Done!")
     print('It took: ' + str(time.time() - start) + ' seconds\n')
     return sortedlist
 
