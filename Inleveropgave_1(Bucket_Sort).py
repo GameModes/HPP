@@ -145,3 +145,8 @@ Simple_negativeList = [101.02, 94.012, 20.05, 33.03, 5.99, -1234.33, -54.130, -3
 '''testing with a small list'''
 sortedlist = runthemainprogram(Simple_negativeList)
 print(sortedlist)
+
+'''
+The steps are approximatly: 12+ 16N + 2N^2 + 2Log(n) + 2N*Log(n)
+Which gives n*Log(n) as Big O
+'''
