@@ -74,7 +74,9 @@ def Ihasabucket(betterlist, negative):
         buckets = [[], [], [], [], [], [], [], [], [], []] #(re)creates 10 empty buckets
         for index in range(len(betterlist)):
             try:
-                buckets[int(betterlist[index][(len(betterlist[0]) - character) - 1])].append(betterlist[index]) #adds the number of the index it is at, and adds it to the bucket
+                buckets[int(betterlist[index][(len(betterlist[0]) - character) - 1])].append(betterlist[index])
+                '''adds the number of the index it is at, and adds it to the bucket aka the distribution pass.'''
+
             except ValueError: #against the "-" value and the "." value
                 continue
 
@@ -82,6 +84,7 @@ def Ihasabucket(betterlist, negative):
             if negative:
                 buckets.reverse() #if indicated that it's a negative list, reverse the buckets
             betterlist  = [y for x in buckets for y in x]
+            ''' gets all the values out the buckets in the list aka the gathering pass'''
     return betterlist
 
 
