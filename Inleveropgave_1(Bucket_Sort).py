@@ -59,19 +59,17 @@ def Ihasabucket(betterlist, negative):
     :return: a sorted list
     """
     for character in range(len(betterlist[0])):
-        buckets = [[], [], [], [], [], [], [], [], [], []]
-        character = len(betterlist[0]) - character
+        buckets = [[], [], [], [], [], [], [], [], [], []] #(re)creates 10 empty buckets
         for index in range(len(betterlist)):
             try:
-                buckets[int(betterlist[index][character - 1])].append(betterlist[index])
+                buckets[int(betterlist[index][(len(betterlist[0]) - character) - 1])].append(betterlist[index]) #adds the number of the index it is at, and adds it to the bucket
             except ValueError: #against the "-" value and the "." value
                 continue
 
-        if buckets != [[], [], [], [], [], [], [], [], [], []]:
+        if buckets != [[], [], [], [], [], [], [], [], [], []]: #catching empty buckets, if the values not got filled (like the valuerror)
             if negative:
-                buckets.reverse()
-            newplaced = [y for x in buckets for y in x]
-            betterlist = newplaced
+                buckets.reverse() #if indicated that it's a negative list, reverse the buckets
+            betterlist  = [y for x in buckets for y in x]
     return betterlist
 
 
@@ -143,7 +141,7 @@ runthemainprogram(randomlist_tenthousand)
 runthemainprogram(randomlist_thirtythousand)
 
 Simple_positiveList = [101.02, 94.012, 20, 33, 5 , 8, 666, 235]
-Simple_negativeList = [101.02, 94.012, 20.05, 33.03, 5.99, -1234.33, -54.130, -394.304]
+Simple_negativeList = [101.02, 94.012, 20.05, 33.03, 5.99, -1234.33, -54.130, -394.304, 442, 1024, 503, -421, 999]
 '''testing with a small list'''
 sortedlist = runthemainprogram(Simple_negativeList)
 print(sortedlist)
