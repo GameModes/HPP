@@ -75,11 +75,10 @@ def Ihasabucket(betterlist):
     return betterlist
 
 
-def runthebucketsort(lst):
+def runthemainprogram(lst):
     """
-
     :param lst:
-    :return:
+    :return: sorted list
     """
     start = time.time()
     print("Using  getbetterlist function on simple list...")
@@ -106,10 +105,14 @@ def runthebucketsort(lst):
         print("Uses Bucket Sort on better list...")
         sortedlist = Ihasabucket(betterlist)
         print("Done!")
-    print('It took: ' + str(time.time() - start) + ' seconds\n')
+    print('Sorting a list with ' + str(len(lst)) + ' length took: ' + str(time.time() - start) + ' seconds\n')
     return sortedlist
 
 def randomlistgenerator():
+    """
+
+    :return: 3 random generated lists
+    """
     randomlist1 = []
     randomlist10 = []
     randomlist30 = []
@@ -131,8 +134,8 @@ Simple_negativeList = [101.02, 94.012, 20, 33, 5, -1234, -13, -394]
 randomlist_thousand, randomlist_tenthousand, randomlist_thirtythousand = randomlistgenerator()
 
 
-runthebucketsort(randomlist_thousand)
+runthemainprogram(randomlist_thousand)
 
-runthebucketsort(randomlist_tenthousand)
+runthemainprogram(randomlist_tenthousand)
 
-runthebucketsort(randomlist_thirtythousand)
+runthemainprogram(randomlist_thirtythousand)
