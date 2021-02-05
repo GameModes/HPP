@@ -55,14 +55,12 @@ def positiv_negative_split(lst):
 
 def Ihasabucket(betterlist):
     """
-
     :param betterlist:
     :return: a sorted list
     """
-    characters = len(betterlist[0])
-    for character in range(characters):
+    for character in range(len(betterlist[0])):
         buckets = [[], [], [], [], [], [], [], [], [], []]
-        character = characters - character
+        character = len(betterlist[0]) - character
         for index in range(len(betterlist)):
             if betterlist[index][character - 1] != '.' and betterlist[index][character - 1] != '-':
                 buckets[int(betterlist[index][character - 1])].append(betterlist[index])
@@ -88,23 +86,23 @@ def runthemainprogram(lst):
         print("Contains negatives")
         print("Splits values...")
         negative_betterlist, positive_betterlist = positiv_negative_split(betterlist)
-        print("Done!")
+        print("Done!" + ' Took: ' + str(time.time() - start) + ' seconds')
         print("Uses Bucket Sort on positive better list...")
         sorted_positive_list = Ihasabucket(positive_betterlist)
         rounded_sorted_positive_list = [round(float(num)) for num in sorted_positive_list]
-        print("Done!")
+        print("Done!" + ' Took: ' + str(time.time() - start) + ' seconds')
         print("Uses Bucket Sort on negative better list...")
         sorted_negative_list = Ihasabucket(negative_betterlist)
         rounded_negative_positive_list = [round(float(num)) for num in sorted_negative_list]
-        print("Done!")
+        print("Done!" + ' Took: ' + str(time.time() - start) + ' seconds')
         print("Adding Together...")
         sortedlist = rounded_negative_positive_list + rounded_sorted_positive_list
-        print("Done!")
+        print("Done!" + ' Took: ' + str(time.time() - start) + ' seconds')
     else:
         print("Contains non negatives")
         print("Uses Bucket Sort on better list...")
         sortedlist = Ihasabucket(betterlist)
-        print("Done!")
+        print("Done! ")
     print('Sorting a list with ' + str(len(lst)) + ' length took: ' + str(time.time() - start) + ' seconds\n')
     return sortedlist
 
