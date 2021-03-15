@@ -1,12 +1,11 @@
-# # Threaded Merge Sort
-
-import time, random, concurrent.futures
-
+import concurrent.futures
 
 # Python program for implementation of MergeSort from Source: https://www.geeksforgeeks.org/merge-sort/
 def mergeSort(arr):
     """
-    This function sorts with the method merge the lists and returns it
+    This function sorts with the method merge the lists and returns it.
+    This mergeSort method is based on using the same function over and over again so the elements in the list can easily be split into smaller ones and
+    back if needed, because of using the L (Left Side) and R(Right Side) in the list
     :Param: A list that is unsorted
     :rtype: Array that is completed sorted
     """
